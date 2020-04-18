@@ -4,7 +4,7 @@
  <title>Colorie</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-04-17T22:19:32+02:00</updated>
+ <updated>2020-04-18T11:13:51+02:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Colorie</name>
@@ -13,11 +13,11 @@
 
  
  <entry>
-   <title>I need interfaces for testable</title>
+   <title>Do we need interfaces for unit testing?</title>
    <link href="http://localhost:4000/2020/04/17/i-need-interfaces-for-testable"/>
    <updated>2020-04-17T00:00:00+02:00</updated>
    <id>http://localhost:4000/2020/04/17/I-need-Interfaces-for-testable</id>
-   <content type="html">&lt;p&gt;No, just no, and once again no. It just doesn’t work like that and thinking in this way can destroy your project. So let’s imagine that you have a service that has some business logic and roles but in order to work, it must communicate with remote services and it also needs to use multiple databases. So, what will happen in any tests? There will be a lot of configuration with mocks and stubs. But why bother if there is a better way to do it. Firstly, what is most important for a good testing experience is the “single responsibility principle”, next is concentrating on writing the methods which have no side effects. Of course, also of importance is understanding basic patterns, which doesn’t mean “I know how to implement it”, it really means “I know which problem solves this pattern and why I use it”.&lt;/p&gt;
+   <content type="html">&lt;p&gt;No, just no, and once again no. It just doesn’t work like that and thinking this way can destroy your project. So let’s imagine that you have a service that has some business logic and roles but in order to work, it must communicate with remote services and it also needs to use multiple databases. So, what will happen in the tests? It will require a lot of configuration with mocks and stubs. But why bother if there is a better way to do it. Firstly, what is most important for a good testing experience is the “single responsibility principle”, next is concentrating on writing the methods which have no side effects. Of course, also of importance is understanding basic patterns, which doesn’t mean “I know how to implement it”, it really means “I know which problem solves this pattern and why I use it”.&lt;/p&gt;
 
 &lt;h3 id=&quot;what-about-solid&quot;&gt;What about SOLID&lt;/h3&gt;
 &lt;p&gt;Now, I guess, somebody will say, “We need to inject each service through an interface because it must have a valid SOLID. “No, it’s not true. The dependency inversion is about the management of the dependency direction.” Robert C. Martin wrote in his book about the “naive implementation of DIP”, meaning that the heuristic approach of “each object needs an interface and DIP” isn’t a good idea because we can always find any objects that are non-volatile and concrete. He also wrote about SDP;  the Stable Dependencies Principle, wherein he demonstrated how to use DIP to manage the dependency direction, and which direction is correct.&lt;/p&gt;
