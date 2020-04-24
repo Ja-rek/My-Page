@@ -4,7 +4,7 @@
  <title>Jarosław Szczerbaty</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-04-18T15:40:04+02:00</updated>
+ <updated>2020-04-24T23:59:55+02:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name></name>
@@ -13,10 +13,19 @@
 
  
  <entry>
-   <title>Do we need interfaces for unit testing?</title>
-   <link href="http://localhost:4000/2020/04/17/i-need-interfaces-for-testable"/>
+   <title>Good/Bad Practice - MVC Pattern</title>
+   <link href="http://localhost:4000/2020/04/17/mvc-pattern"/>
    <updated>2020-04-17T00:00:00+02:00</updated>
-   <id>http://localhost:4000/2020/04/17/I-need-Interfaces-for-testable</id>
+   <id>http://localhost:4000/2020/04/17/MVC-pattern</id>
+   <content type="html">&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-Zim2aUO3K8&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Do we need interfaces for unit testing?</title>
+   <link href="http://localhost:4000/2020/04/17/do-we-need-interfaces-for-unit-testing-md"/>
+   <updated>2020-04-17T00:00:00+02:00</updated>
+   <id>http://localhost:4000/2020/04/17/Do-we-need-interfaces-for-unit-testing.md</id>
    <content type="html">&lt;p&gt;No, just no, and once again no. It just doesn’t work like that and thinking this way can destroy your project. So let’s imagine that you have a service that has some business logic and roles but in order to work, it must communicate with remote services and it also needs to use multiple databases. So, what will happen in the tests? The tests will require a long configuration of mocks and stubs. But why bother if there is a better way to do it. Firstly, what is most important for a good testing experience is the “single responsibility principle”, next is concentrating on writing the methods which have no side effects. Of course, also of importance is understanding basic patterns, which doesn’t mean “I know how to implement it”, it really means “I know which problem solves this pattern and why I use it”.&lt;/p&gt;
 
 &lt;h3 id=&quot;what-about-solid&quot;&gt;What about SOLID&lt;/h3&gt;
@@ -217,7 +226,7 @@
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Now let’s look at what happened in the test, better isn’t?&lt;/p&gt;
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PassengerService&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PassengerService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
@@ -245,7 +254,15 @@
 
 &lt;h3 id=&quot;second-refactoring&quot;&gt;Second refactoring&lt;/h3&gt;
 &lt;p&gt;Let’s correctly implemented the MVC pattern, remove “repository”, provide SRP and separate methods with side effects.&lt;/p&gt;
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PassengerController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Controller&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;readonly&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PassengersViewModelProvaider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passengersViewModelProvaider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PassengerController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PassengersViewModelProvaider&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passengersViewModelProvaider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;passengersViewModelProvaider&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passengersViewModelProvaider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
    	&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PassengerInformationViewModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newViewModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passengersViewModelProvaider&lt;/span&gt;
@@ -256,7 +273,7 @@
 
             &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;RedirectToAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Index&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PassengersViewModelProvaider&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -312,7 +329,7 @@
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Tests looks good, isn’t?&lt;/p&gt;
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;       &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passengerPositions&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ConfirmationEmailRewriter&lt;/span&gt;
@@ -342,7 +359,7 @@
             &lt;span class=&quot;n&quot;&gt;CollectionAssert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AreEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expectedPassengers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passengers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The DIP is still there, the facade &lt;code class=&quot;highlighter-rouge&quot;&gt;PassengersViewModelProvaider&lt;/code&gt; has declared in interfaces what needs. The facade just manages other transaction scripts to solve any business problem. If you need a unit test you can just test the &lt;code class=&quot;highlighter-rouge&quot;&gt;PassengersRewriter&lt;/code&gt;, but if you need an integration test you can make a test on the facade.&lt;/p&gt;
+&lt;p&gt;The DIP is still there, the facade &lt;code class=&quot;highlighter-rouge&quot;&gt;PassengersViewModelProvaider&lt;/code&gt; has declared in interfaces what needs, but in the controller, I don’t use the DIP because it has no sense. The facade just manages other transaction scripts to solve any business problem. If you need a unit test you can just test the &lt;code class=&quot;highlighter-rouge&quot;&gt;PassengersRewriter&lt;/code&gt;, but if you need an integration test you can make a test on the facade.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 &lt;p&gt;The dependency inversion principle isn’t about testing, it’s about the management of dependency direction. You don’t need interfaces for testing but it can be helpful. SRP and Separate methods without side effects are most important for a good testing experience. Mixing dependencies of UI framework with business logic is never a good idea.&lt;/p&gt;

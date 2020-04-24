@@ -2,18 +2,22 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://localhost:4000/about</loc>
-<lastmod>2020-04-18T15:40:04+02:00</lastmod>
+<lastmod>2020-04-24T23:59:55+02:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/projects</loc>
-<lastmod>2020-04-18T15:40:04+02:00</lastmod>
+<lastmod>2020-04-24T23:59:55+02:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/tags</loc>
-<lastmod>2020-04-18T15:40:04+02:00</lastmod>
+<lastmod>2020-04-24T23:59:55+02:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/2020/04/17/i-need-interfaces-for-testable</loc>
+<loc>http://localhost:4000/2020/04/17/do-we-need-interfaces-for-unit-testing-md</loc>
+<lastmod>2020-04-17T00:00:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/2020/04/17/mvc-pattern</loc>
 <lastmod>2020-04-17T00:00:00+02:00</lastmod>
 </url>
 <url>
@@ -35,5 +39,8 @@
 </url>
 <url>
 <loc>http://localhost:4000/tag/Architecture/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/tag/YouTube/</loc>
 </url>
 </urlset>
